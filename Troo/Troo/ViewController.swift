@@ -73,6 +73,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func searchBarSearchButtonClicked(_searchBar: UISearchBar)
     {
         self.mapView.showsUserLocation = false
+        
+        if self.mapView.annotations.count > 0
+        {
+            removeMapAnnotations()
+        }
 //         self.searchBar.resignFirstResponder()
         self.view.endEditing(true) // retracts the keyboard after address entry
         
@@ -95,6 +100,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.mapView.addAnnotation(pointAnnotation)
                 self.mapView.setRegion(MKCoordinateRegion(center: pointAnnotation.coordinate, span: MKCoordinateSpan(latitudeDelta: self.mapZoomInFactor, longitudeDelta: self.mapZoomInFactor)), animated: true)
                 
+                print("Number of addresses: \(localSearchResponse?.mapItems.count)")
+                
+                print(localSearchResponse?.mapItems)
+                
                 self.localSearchCurrentLocation = (localSearchResponse?.mapItems.last?.placemark.name)!
             }
             else
@@ -106,6 +115,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         
+    }
+    
+    func removeMapAnnotations()
+    {
+        let allMapAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allMapAnnotations)
     }
     
     //TODO: Remove the previous pin annotations

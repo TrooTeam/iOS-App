@@ -39,7 +39,7 @@ class RecordingViewController: UIViewController, AVAudioPlayerDelegate, AVAudioR
         
         setupRecorder()
         
-        var gesture : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
+        let gesture : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
         gesture.minimumPressDuration = 1.0
         
         self.view.addGestureRecognizer(gesture)
@@ -47,6 +47,19 @@ class RecordingViewController: UIViewController, AVAudioPlayerDelegate, AVAudioR
     
     func setupRecorder()
     {
+        // set up the audio session
+        // the audio session acts as the middle man between the app and the system's media service
+        // answers question like should the app stops the currently playing music, should be allowed to play back the recording
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do
+        {
+            
+            try audioSession.setCategory(AVAudioSessionCategoryRecord)
+
+        } catch let error {
+            print(error)
+        }
         
         let recordSettings: [String : AnyObject] =
         [
@@ -66,8 +79,8 @@ class RecordingViewController: UIViewController, AVAudioPlayerDelegate, AVAudioR
             print("An error occured: \(error)")
         }
         
-        //TODO: FIX THIS FUCKING THING ON AN IPHONE!!! THIS SHIT DOESN"T WORK ON A PHONE
         soundRecorder.delegate = self
+        soundRecorder.meteringEnabled = true
         soundRecorder.prepareToRecord()
     }
     
@@ -120,8 +133,17 @@ class RecordingViewController: UIViewController, AVAudioPlayerDelegate, AVAudioR
         if longPress.state == .Began && soundRecorder.recording == false
         {
             changeRecordingState(2)
-            soundRecorder.record()
-            print("Starting Recording...")
+            do
+            {
+                let audioSession = AVAudioSession.sharedInstance()
+                try audioSession.setActive(true)    // make the recorder work
+                soundRecorder.record()
+                print("Starting Recording...")
+            }
+            catch
+            {
+                print("An error occured: \(error)")
+            }
         }
         else if longPress.state == .Ended
         {
