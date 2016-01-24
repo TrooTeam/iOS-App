@@ -112,10 +112,10 @@ class RecordingViewController: UIViewController, AVAudioPlayerDelegate, AVAudioR
         switch(count)
         {
         case 1:// recording off
-            UIImage(named: "troo record off 5S")?.drawInRect(self.view.bounds)
+            UIImage(named: "troov2recordinghold")?.drawInRect(self.view.bounds)
             break
         case 2: // recording on
-            UIImage(named: "troo record on 5S")?.drawInRect(self.view.bounds)
+            UIImage(named: "troov2recordingrelease")?.drawInRect(self.view.bounds)
             break
         default:
             break

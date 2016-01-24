@@ -25,7 +25,6 @@
 		B26688EC1C25FE11002B3FE0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26688E21C25FE11002B3FE0 /* StoreKit.framework */; };
 		B26688ED1C25FE11002B3FE0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26688E31C25FE11002B3FE0 /* SystemConfiguration.framework */; };
 		B26688F01C26455B002B3FE0 /* FeedBackTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26688EF1C26455B002B3FE0 /* FeedBackTableVC.swift */; };
-		B26688F61C26B007002B3FE0 /* LoginVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26688F51C26B007002B3FE0 /* LoginVCViewController.swift */; };
 		B26688F81C26C016002B3FE0 /* SampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26688F71C26C016002B3FE0 /* SampleVC.swift */; };
 		B270F63F1C258A7900756B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B270F63E1C258A7900756B26 /* AppDelegate.swift */; };
 		B270F6411C258A7900756B26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B270F6401C258A7900756B26 /* ViewController.swift */; };
@@ -35,6 +34,7 @@
 		B270F6541C258A7900756B26 /* TrooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B270F6531C258A7900756B26 /* TrooTests.swift */; };
 		B270F65F1C258A7900756B26 /* TrooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B270F65E1C258A7900756B26 /* TrooUITests.swift */; };
 		B270F66D1C258EEC00756B26 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B270F66C1C258EEC00756B26 /* MapKit.framework */; };
+		B28C42321C5427CD00DACEF9 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28C42311C5427CD00DACEF9 /* MainMenuVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +73,6 @@
 		B26688E21C25FE11002B3FE0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B26688E31C25FE11002B3FE0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B26688EF1C26455B002B3FE0 /* FeedBackTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackTableVC.swift; sourceTree = "<group>"; };
-		B26688F51C26B007002B3FE0 /* LoginVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVCViewController.swift; sourceTree = "<group>"; };
 		B26688F71C26C016002B3FE0 /* SampleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleVC.swift; sourceTree = "<group>"; };
 		B270F63B1C258A7900756B26 /* Troo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Troo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B270F63E1C258A7900756B26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +88,8 @@
 		B270F65E1C258A7900756B26 /* TrooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrooUITests.swift; sourceTree = "<group>"; };
 		B270F6601C258A7900756B26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B270F66C1C258EEC00756B26 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B28C42311C5427CD00DACEF9 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
+		B28C42331C54319700DACEF9 /* Rounded_Elegance.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rounded_Elegance.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,9 +163,9 @@
 			children = (
 				B270F6401C258A7900756B26 /* ViewController.swift */,
 				B26688F71C26C016002B3FE0 /* SampleVC.swift */,
-				B26688F51C26B007002B3FE0 /* LoginVCViewController.swift */,
 				B26688EF1C26455B002B3FE0 /* FeedBackTableVC.swift */,
 				B26688CC1C25D7C5002B3FE0 /* RecordingViewController.swift */,
+				B28C42311C5427CD00DACEF9 /* MainMenuVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -172,6 +173,7 @@
 		B270F6321C258A7900756B26 = {
 			isa = PBXGroup;
 			children = (
+				B28C42341C54321600DACEF9 /* Supported Files */,
 				B26688EE1C25FE41002B3FE0 /* Frameworks */,
 				B270F63D1C258A7900756B26 /* Troo */,
 				B270F6521C258A7900756B26 /* TrooTests */,
@@ -219,6 +221,14 @@
 				B270F6601C258A7900756B26 /* Info.plist */,
 			);
 			path = TrooUITests;
+			sourceTree = "<group>";
+		};
+		B28C42341C54321600DACEF9 /* Supported Files */ = {
+			isa = PBXGroup;
+			children = (
+				B28C42331C54319700DACEF9 /* Rounded_Elegance.ttf */,
+			);
+			name = "Supported Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,9 +370,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B26688F61C26B007002B3FE0 /* LoginVCViewController.swift in Sources */,
 				B26688CD1C25D7C5002B3FE0 /* RecordingViewController.swift in Sources */,
 				B26688F81C26C016002B3FE0 /* SampleVC.swift in Sources */,
+				B28C42321C5427CD00DACEF9 /* MainMenuVC.swift in Sources */,
 				B270F6411C258A7900756B26 /* ViewController.swift in Sources */,
 				B26688F01C26455B002B3FE0 /* FeedBackTableVC.swift in Sources */,
 				B270F63F1C258A7900756B26 /* AppDelegate.swift in Sources */,

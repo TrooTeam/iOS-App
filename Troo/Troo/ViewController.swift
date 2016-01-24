@@ -15,13 +15,13 @@ import AVFoundation
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, AVAudioPlayerDelegate
 {
-
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var recordBtn: UIButton!
     
     let mapZoomInFactor: CLLocationDegrees = 0.5
     let locationManager = CLLocationManager()
+    let animationDuration : NSTimeInterval = 5.50
     
     var localSearchCurrentLocation: String = String()
     public var lastAttemptAtLocation = String()
@@ -89,22 +89,47 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         localSearch.startWithCompletionHandler { (localSearchResponse: MKLocalSearchResponse?, error: NSError?) -> Void in
             if error == nil
             {
-                let pointAnnotation = MKPointAnnotation()
-                pointAnnotation.title = localSearchResponse?.mapItems.last?.name
+                var pointAnnotations = [MKAnnotation]()
                 
-                pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: (localSearchResponse?.mapItems.last?.placemark.coordinate.latitude)!, longitude: (localSearchResponse?.mapItems.last?.placemark.coordinate.longitude)!)
+                for (var i = 0; i < localSearchResponse?.mapItems.count; ++i)
+                {
+                    let pointAnnotation = MKPointAnnotation()
+                    pointAnnotation.title = localSearchResponse?.mapItems[i].name
+                    
+                    pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: (localSearchResponse?.mapItems[i].placemark.coordinate.latitude)!, longitude: (localSearchResponse?.mapItems[i].placemark.coordinate.longitude)!)
+                    
+                   pointAnnotations.append(pointAnnotation)
+                }
                 
-                //TODO: Add a cool animation possibly for the zooming out and in?
-                //TODO: Include an adress auto-completion
-                self.mapView.centerCoordinate = pointAnnotation.coordinate
-                self.mapView.addAnnotation(pointAnnotation)
-                self.mapView.setRegion(MKCoordinateRegion(center: pointAnnotation.coordinate, span: MKCoordinateSpan(latitudeDelta: self.mapZoomInFactor, longitudeDelta: self.mapZoomInFactor)), animated: true)
+                print("Size: \(pointAnnotations.count)")
+                
+//                let pointAnnotation = MKPointAnnotation()
+//                pointAnnotation.title = localSearchResponse?.mapItems.last?.name
+//                
+//                pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: (localSearchResponse?.mapItems.last?.placemark.coordinate.latitude)!, longitude: (localSearchResponse?.mapItems.last?.placemark.coordinate.longitude)!)
+//                
+//                //TODO: Add a cool animation possibly for the zooming out and in?
+//                //TODO: Include an adress auto-completion
+//                self.mapView.centerCoordinate = pointAnnotation.coordinate
+//                self.mapView.addAnnotation(pointAnnotation)
+//                self.mapView.setRegion(MKCoordinateRegion(center: pointAnnotation.coordinate, span: MKCoordinateSpan(latitudeDelta: self.mapZoomInFactor, longitudeDelta: self.mapZoomInFactor)), animated: true)
+                
+                self.mapView.addAnnotations(pointAnnotations)
+                
+//                self.mapView.setRegion(MKCoordinateRegion(center: (pointAnnotations.last?.coordinate)!, span: MKCoordinateSpan(latitudeDelta: self.mapZoomInFactor, longitudeDelta: self.mapZoomInFactor)), animated: true)
+                
+                UIView.animateWithDuration(self.animationDuration)
+                {
+                    self.mapView.setRegion(MKCoordinateRegion(center: (pointAnnotations.last?.coordinate)!, span: MKCoordinateSpan(latitudeDelta: self.mapZoomInFactor, longitudeDelta: self.mapZoomInFactor)), animated: true)
+                }
+                
+//                self.mapView.setRegion(MKCoordinateRegion(center: pointAnnotations.coordinate, span: MKCoordinateSpan(latitudeDelta: self.mapZoomInFactor, longitudeDelta: self.mapZoomInFactor)), animated: true)
                 
                 print("Number of addresses: \(localSearchResponse?.mapItems.count)")
                 
-                print(localSearchResponse?.mapItems)
+//                print(localSearchResponse?.mapItems)
                 
-                self.localSearchCurrentLocation = (localSearchResponse?.mapItems.last?.placemark.name)!
+//                self.localSearchCurrentLocation = (localSearchResponse?.mapItems.last?.placemark.name)!
             }
             else
             {
@@ -123,22 +148,38 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.mapView.removeAnnotations(allMapAnnotations)
     }
     
-    //TODO: Remove the previous pin annotations
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?
     {
         guard !(annotation is MKUserLocation) else { return nil }
         
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("identifier") as? MKPinAnnotationView
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("identifier")
+        
+//        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("identifier") as! MKAnnotationView
+        
         if annotationView == nil
         {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "identifier")
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "identifier")
             annotationView?.canShowCallout = true
+            annotationView?.image = UIImage(named: "Restaurant Pickup-32")
             annotationView?.rightCalloutAccessoryView = UIButton(type: .InfoLight)
         }
         else
         {
             annotationView?.annotation = annotation
         }
+        
+//        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("identifier") as? MKPinAnnotationView
+//        if annotationView == nil
+//        {
+//            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "identifier")
+//            annotationView?.canShowCallout = true
+//            annotationView?.image = UIImage(named: "Restaurant Pickup-50")
+//            annotationView?.rightCalloutAccessoryView = UIButton(type: .InfoLight)
+//        }
+//        else
+//        {
+//            annotationView?.annotation = annotation
+//        }
         
         return annotationView
     }
